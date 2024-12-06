@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sua Drogaria está a alguns passos de se tornar uma máquina de vendas pela Internet!</title>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Lato","Helvetica","Arial",sans-serif;
+            background: #fff;
+            color: rgb(38, 50, 56);
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20%;
+            height: 4px;
+            background-color: #2979FF;
+            transition: width 1s ease-in-out;
+            z-index: 9999;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .container img {
+            width: 40%;
+            max-width: 200px;
+            height: auto;
+        }
+
+        h1 {
+            font-size: 2rem;
+            line-height: 2.4rem;
+            margin-bottom: 16px;
+            margin-top: 0;
+        }
+
+        h2 {
+            font-size: 1rem;
+            line-height: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        p {
+            font-size: 0.9rem;
+            line-height: 1.4rem;
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        .stepButton {
+            background-color: rgb(41, 121, 255);
+            border-radius: 5px;
+            border: 1px solid rgb(41, 121, 255);
+            font-size: 1.2rem;
+            color: white;
+            font-family: "Lato","Helvetica","Arial",sans-serif;
+            line-height: 1.2rem;
+            padding: 16px 32px;
+            cursor: pointer;
+            margin-top: 24px;
+            align-self: center;
+        }
+
+        .stepButton:hover {
+            background-color: #1c68d8;
+            border-color: #1c68d8;
+        }
+
+        input {
+            font-family: "Lato","Helvetica","Arial",sans-serif;
+            font-size: 1.2rem;
+            background: transparent;
+            border: 0;
+            border-bottom: 1px solid rgb(41, 121, 255);
+            padding: 8px 0;
+            color: rgb(41, 121, 255);
+            width: 100%;
+            max-width: 100%;
+        }
+
+        input:focus {
+            outline: none;
+            border-bottom: 1px solid #1c68d8;
+        }
+
+        .animate__animated {
+            --animate-duration: 0.3s;
+        }
+
+        .button2 {
+            color: rgb(41, 121, 255);
+            font-family: "Lato","Helvetica","Arial",sans-serif;
+            font-size: 1rem;
+            line-height: 1.4rem;
+            background-color: white;
+            padding: 8px;
+            border: 1px solid rgb(41, 121, 255);
+            border-radius: 4px;
+            margin: 4px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .button2:hover {
+            background-color: #f0f6ff;
+        }
+
+        .button2 span {
+            color: rgb(41, 121, 255);
+            font-size: 0.9rem;
+            background-color: #DFEBFF;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+        }
+
+        .step {
+            display: none;
+            flex-direction: column;
+            margin-top: 16px;
+        }
+
+        .step.active {
+            display: flex;
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 0.9rem;
+            }
+
+            p {
+                font-size: 0.8rem;
+            }
+
+            .container img {
+                width: 60%;
+            }
+
+            .stepButton {
+                font-size: 1rem;
+                padding: 12px 24px;
+            }
+
+            input {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar"></div>
+    <div class="container">
+        <img src="logo.png" alt="Logo">
+
+        <div class="step active">
+            <h1>Sua Drogaria está a alguns passos de se tornar uma máquina de vendas pela Internet!</h1>
+            <h2>Pronto para elevar suas vendas ao próximo nível com estratégias que já transformaram os resultados de várias farmácias como a sua?</h2>
+            <p>⏰Tempo Estimado: Menos de 1 minuto</p>
+            <p>👨‍⚕️ Preenchimento: 1076 pessoas preencheram</p>
+            <button class="stepButton" onclick="nextNext()">Começar →</button>
+        </div>
+        
+        <div class="step animate__animated animate__fadeInUp">
+            <h1>Como podemos te chamar?</h1>
+            <h2>Preencha seu nome.</h2>
+            <input type="text" placeholder="Seu nome">
+            <button class="stepButton" onclick="nextNext()">Responder</button>
+        </div>
+        
+        <div class="step animate__animated animate__fadeInUp">
+            <h1>Preencha seu telefone, para te chamarmos o mais rápido possível.</h1>
+            <h2>Coloque seu número de Whatsapp</h2>
+            <input type="text" placeholder="(XX) XXXXX-XXXX">
+            <button class="stepButton" onclick="nextNext()">Responder</button>
+        </div>
+        
+        <div class="step animate__animated animate__fadeInUp">
+            <h1>Qual o Instagram da sua drogaria?</h1>
+            <h2>Coloque o @ da sua loja aqui.</h2>
+            <input type="text" placeholder="@seudrogaria">
+            <button class="stepButton" onclick="nextNext()">Responder</button>
+        </div>
+        
+        <div class="step animate__animated animate__fadeInUp">
+            <h1>Show! Agora, para te orientarmos melhor, qual o faturamento mensal da sua empresa?</h1>
+            <button class="button2" onclick="nextNext()">
+                <span>A</span>
+                Abaixo de R$50.000,00
+            </button>
+            <button class="button2" onclick="nextNext()">
+                <span>B</span>
+                R$50.000,00 a R$70.000,00
+            </button>
+            <button class="button2" onclick="nextNext()">
+                <span>C</span>
+                R$100.000,00 a R$200.000,00
+            </button>
+            <button class="button2" onclick="nextNext()">
+                <span>D</span>
+                R$200.000,00 a R$400.000,00
+            </button>
+            <button class="button2" onclick="nextNext()">
+                <span>E</span>
+                Mais de R$400.000,00
+            </button>
+        </div>
+        
+        <div class="step animate__animated animate__fadeInUp">
+            <h1>Existem dois investimentos necessários quando estamos falando de anúncios online:</h1>
+            <h2>- Saldo em anúncios que são pagos diretamente à plataforma (Facebook/Instagram/Google.)</h2>
+            <h2>- Mão de obra, pagamento feito diretamente a nós, referente aos nossos honorários</h2>
+            <h2>É como se você tivesse contratado um pintor (pagando pela mão de obra) e também comprado as tintas, é o mesmo contexto.</h2>
+            <button class="stepButton" onclick="nextNext()">Continuar →</button>
+        </div>
+        
+        <div class="step animate__animated animate__fadeInUp">
+            <h1>Para garantir resultados efetivos com seus anúncios, sugerimos um investimento diário a partir de R$50,00 (Equivalente a R$1.500,00 por mês) exclusivamente para as campanhas publicitárias, o que não inclui nossa taxa de serviço.</h1>
+            <h2>Esse valor está de acordo com seu orçamento atual?</h2>
+            <button class="button2" onclick="nextNext()">Sim, estou pronto para levar minha drogaria para outro patamar</button>
+            <button class="button2" onclick="nextNext()">Infelizmente ainda não é o meu momento</button>
+        </div>
+    </div>
+	
+	<script>
+		let stepCount = 0;
+		function nextNext() {
+			const steps = Array.from(document.querySelectorAll(".step"));
+			steps[stepCount].classList.remove("active");
+			stepCount++;
+			if (stepCount < steps.length) {
+				steps[stepCount].classList.add("active");
+			} else {
+				
+			}
+		}
+	</script>
+</body>
+</html>
