@@ -26,10 +26,10 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 20%;
+            width: 0%; /* Inicia em 0% */
             height: 4px;
             background-color: #2979FF;
-            transition: width 1s ease-in-out;
+            transition: width 0.5s ease-in-out;
             z-index: 9999;
         }
 
@@ -211,7 +211,7 @@
         <div class="step animate__animated animate__fadeInUp">
             <h1>Qual o Instagram da sua drogaria?</h1>
             <h2>Coloque o @ da sua loja aqui.</h2>
-            <input type="text" placeholder="@seudrogaria">
+            <input type="text" placeholder="@suadrogaria">
             <button class="stepButton" onclick="nextNext()">Responder</button>
         </div>
         
@@ -257,16 +257,27 @@
 	
 	<script>
 		let stepCount = 0;
+		const steps = Array.from(document.querySelectorAll(".step"));
+		const progressBar = document.querySelector(".progress-bar");
+		const totalSteps = steps.length - 1;
+
 		function nextNext() {
-			const steps = Array.from(document.querySelectorAll(".step"));
 			steps[stepCount].classList.remove("active");
 			stepCount++;
-			if (stepCount < steps.length) {
+
+			if (stepCount <= totalSteps) {
 				steps[stepCount].classList.add("active");
-			} else {
-				
 			}
+
+			updateProgressBar();
 		}
+
+		function updateProgressBar() {
+			const progress = (stepCount / totalSteps) * 100;
+			progressBar.style.width = progress + "%";
+		}
+		
+		updateProgressBar();
 	</script>
 </body>
 </html>
