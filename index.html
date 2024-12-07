@@ -282,13 +282,20 @@
 				const ig = document.getElementById("ig").value;
 				console.log({name, phone, ig, billing});
 				
-				fetch("https://vnfpbxs4amwrcufsd77rbujtq40jwerd.lambda-url.sa-east-1.on.aws/", {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify({name, phone, ig, billing})
-				});
+				fbq('track', 'CompleteRegistration', {name, phone, ig, billing});
+				
+				try {
+					fetch("https://vnfpbxs4amwrcufsd77rbujtq40jwerd.lambda-url.sa-east-1.on.aws/", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify({name, phone, ig, billing})
+					});
+				}
+				catch (e) {
+					console.log(e);
+				}
 			}
 
 			updateProgressBar();
