@@ -198,43 +198,43 @@
         <div class="step animate__animated animate__fadeInUp">
             <h1>Como podemos te chamar?</h1>
             <h2>Preencha seu nome.</h2>
-            <input type="text" placeholder="Seu nome">
+            <input id="name" type="text" placeholder="Seu nome">
             <button class="stepButton" onclick="nextNext()">Responder</button>
         </div>
         
         <div class="step animate__animated animate__fadeInUp">
             <h1>Preencha seu telefone, para te chamarmos o mais rápido possível.</h1>
             <h2>Coloque seu número de Whatsapp</h2>
-            <input type="text" placeholder="(XX) XXXXX-XXXX">
+            <input id="phone" type="text" placeholder="(XX) XXXXX-XXXX">
             <button class="stepButton" onclick="nextNext()">Responder</button>
         </div>
         
         <div class="step animate__animated animate__fadeInUp">
             <h1>Qual o Instagram da sua drogaria?</h1>
             <h2>Coloque o @ da sua loja aqui.</h2>
-            <input type="text" placeholder="@suadrogaria">
+            <input id="ig" type="text" placeholder="@suadrogaria">
             <button class="stepButton" onclick="nextNext()">Responder</button>
         </div>
         
         <div class="step animate__animated animate__fadeInUp">
             <h1>Show! Agora, para te orientarmos melhor, qual o faturamento mensal da sua empresa?</h1>
-            <button class="button2" onclick="nextNext()">
+            <button class="button2" onclick="billing='A'; nextNext()">
                 <span>A</span>
                 Abaixo de R$50.000,00
             </button>
-            <button class="button2" onclick="nextNext()">
+            <button class="button2" onclick="billing='B'; nextNext()">
                 <span>B</span>
                 R$50.000,00 a R$70.000,00
             </button>
-            <button class="button2" onclick="nextNext()">
+            <button class="button2" onclick="billing='C'; nextNext()">
                 <span>C</span>
                 R$100.000,00 a R$200.000,00
             </button>
-            <button class="button2" onclick="nextNext()">
+            <button class="button2" onclick="billing='D'; nextNext()">
                 <span>D</span>
                 R$200.000,00 a R$400.000,00
             </button>
-            <button class="button2" onclick="nextNext()">
+            <button class="button2" onclick="billing='E'; nextNext()">
                 <span>E</span>
                 Mais de R$400.000,00
             </button>
@@ -263,6 +263,7 @@
 	
 	<script>
 		let stepCount = 0;
+		let billing = null;
 		const steps = Array.from(document.querySelectorAll(".step"));
 		const progressBar = document.querySelector(".progress-bar");
 		const totalSteps = steps.length - 1;
@@ -273,6 +274,21 @@
 
 			if (stepCount <= totalSteps) {
 				steps[stepCount].classList.add("active");
+			}
+			
+			if (stepCount == totalSteps) {
+				const name = document.getElementById("name").value;
+				const phone = document.getElementById("phone").value;
+				const ig = document.getElementById("ig").value;
+				console.log({name, phone, ig, billing});
+				
+				fetch("https://vnfpbxs4amwrcufsd77rbujtq40jwerd.lambda-url.sa-east-1.on.aws/", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({name, phone, ig, billing})
+				});
 			}
 
 			updateProgressBar();
