@@ -192,49 +192,49 @@
             <h2>Pronto para elevar suas vendas ao próximo nível com estratégias que já transformaram os resultados de várias farmácias como a sua?</h2>
             <p>⏰Tempo Estimado: Menos de 1 minuto</p>
             <p>👨‍⚕️ Preenchimento: 1076 pessoas preencheram</p>
-            <button class="stepButton" onclick="nextNext()">Começar →</button>
+            <button class="stepButton" onclick="nextStep()">Começar →</button>
         </div>
         
         <div class="step animate__animated animate__fadeInUp">
             <h1>Como podemos te chamar?</h1>
             <h2>Preencha seu nome.</h2>
             <input id="name" type="text" placeholder="Seu nome">
-            <button class="stepButton" onclick="nextNext()">Responder</button>
+            <button class="stepButton" onclick="nextStep()">Responder</button>
         </div>
         
         <div class="step animate__animated animate__fadeInUp">
             <h1>Preencha seu telefone, para te chamarmos o mais rápido possível.</h1>
             <h2>Coloque seu número de Whatsapp</h2>
             <input id="phone" type="text" placeholder="(XX) XXXXX-XXXX">
-            <button class="stepButton" onclick="nextNext()">Responder</button>
+            <button class="stepButton" onclick="nextStep()">Responder</button>
         </div>
         
         <div class="step animate__animated animate__fadeInUp">
             <h1>Qual o Instagram da sua drogaria?</h1>
             <h2>Coloque o @ da sua loja aqui.</h2>
             <input id="ig" type="text" placeholder="@suadrogaria">
-            <button class="stepButton" onclick="nextNext()">Responder</button>
+            <button class="stepButton" onclick="nextStep()">Responder</button>
         </div>
         
         <div class="step animate__animated animate__fadeInUp">
             <h1>Show! Agora, para te orientarmos melhor, qual o faturamento mensal da sua empresa?</h1>
-            <button class="button2" onclick="billing='A'; nextNext()">
+            <button class="button2" onclick="billing='0-50k'; nextStep()">
                 <span>A</span>
                 Abaixo de R$50.000,00
             </button>
-            <button class="button2" onclick="billing='B'; nextNext()">
+            <button class="button2" onclick="billing='50-70k'; nextStep()">
                 <span>B</span>
                 R$50.000,00 a R$70.000,00
             </button>
-            <button class="button2" onclick="billing='C'; nextNext()">
+            <button class="button2" onclick="billing='100-200k'; nextStep()">
                 <span>C</span>
                 R$100.000,00 a R$200.000,00
             </button>
-            <button class="button2" onclick="billing='D'; nextNext()">
+            <button class="button2" onclick="billing='200-400k'; nextStep()">
                 <span>D</span>
                 R$200.000,00 a R$400.000,00
             </button>
-            <button class="button2" onclick="billing='E'; nextNext()">
+            <button class="button2" onclick="billing='400k+'; nextStep()">
                 <span>E</span>
                 Mais de R$400.000,00
             </button>
@@ -245,19 +245,19 @@
             <h2>- Saldo em anúncios que são pagos diretamente à plataforma (Facebook/Instagram/Google.)</h2>
             <h2>- Mão de obra, pagamento feito diretamente a nós, referente aos nossos honorários</h2>
             <h2>É como se você tivesse contratado um pintor (pagando pela mão de obra) e também comprado as tintas, é o mesmo contexto.</h2>
-            <button class="stepButton" onclick="nextNext()">Continuar →</button>
+            <button class="stepButton" onclick="nextStep()">Continuar →</button>
         </div>
         
         <div class="step animate__animated animate__fadeInUp">
             <h1>Para garantir resultados efetivos com seus anúncios, sugerimos um investimento diário a partir de R$30,00 (Equivalente a R$900,00 por mês) exclusivamente para as campanhas publicitárias, o que não inclui nossa taxa de serviço.</h1>
             <h2>Esse valor está de acordo com seu orçamento atual?</h2>
-            <button class="button2" onclick="nextNext()">Sim, estou pronto para levar minha drogaria para outro patamar</button>
-            <button class="button2" onclick="nextNext()">Infelizmente ainda não é o meu momento</button>
+            <button class="button2" onclick="nextStep(this)">Sim, estou pronto para levar minha drogaria para outro patamar</button>
+            <button id="nao" class="button2" onclick="nextStep(this)">Infelizmente ainda não é o meu momento</button>
         </div>
 		
 		<div class="step animate__animated animate__fadeInUp" style="flex-direction: column;">
 			<i class="fas fa-paper-plane" style="font-size: 150px; align-self: center;"></i>
-			<h1>Perfeito! Iremos entrar em contato com você nas próximas 24 horas.</h1>
+			<h1 id="final-text">Perfeito! Iremos entrar em contato com você nas próximas 24 horas.</h1>
 		</div>
     </div>
 	
@@ -268,19 +268,41 @@
 		const progressBar = document.querySelector(".progress-bar");
 		const totalSteps = steps.length - 1;
 
-		function nextNext() {
+		function nextStep(element) {
+			const currentStep = steps[stepCount];
+			const input = currentStep.querySelector("input");
+			
+			if (input && input.value.trim() === "") {
+				input.style.borderBottom = "1px solid red";
+				input.focus();
+				return;
+			}
+
+			if (input) {
+				input.style.borderBottom = "1px solid rgb(41, 121, 255)";
+			}
+		
+		
 			steps[stepCount].classList.remove("active");
 			stepCount++;
 
 			if (stepCount <= totalSteps) {
 				steps[stepCount].classList.add("active");
+				steps[stepCount].querySelector("input")?.focus();
 			}
 			
 			if (stepCount == totalSteps) {
+				let interessados = true;
+				
+				if (element && element.id == "nao") {
+					interessados = false;
+					document.getElementById("final-text").innerText = "Obrigado, mas você não é nosso cliente ideal no momento.";
+				}
+				
 				const name = document.getElementById("name").value;
 				const phone = document.getElementById("phone").value;
 				const ig = document.getElementById("ig").value;
-				console.log({name, phone, ig, billing});
+				console.log({name, phone, ig, billing, interessados});
 				
 				fbq('track', 'CompleteRegistration', {name, phone, ig, billing});
 				
@@ -290,7 +312,7 @@
 						headers: {
 							"Content-Type": "application/json"
 						},
-						body: JSON.stringify({name, phone, ig, billing})
+						body: JSON.stringify({name, phone, ig, billing, interessados})
 					});
 				}
 				catch (e) {
